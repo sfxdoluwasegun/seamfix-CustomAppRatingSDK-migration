@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="rate_us_on_playstore">Rate us on Play Store</string>
+    <string name="continue_text">Continue</string>
+    <string name="skip">Skip</string>
+    <string name="couldnt_find_playstore">Couldn\'t find PlayStore on this device</string>
+    <string name="how_was_your_experience_with_us">How was your experience with us</string>
+    <string name="play_store_invite_message">If you are enjoying this app, would you mind taking a moment to rate it on Google Playstore, it won’t take more than a minute. Thank you for your support!</string>
+    <string name="rating_feedback_hint">Please, can you tell us what went wrong?</string>
+    <string name="never">Never</string>
+    <string name="rate_now">Rate Now</string>
+    <string name="later">No, thanks</string>
+</resources>

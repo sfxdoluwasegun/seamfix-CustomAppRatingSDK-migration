@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:background="@drawable/round_edge_background_light_grey"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/margin_medium"
+    android:paddingLeft="@dimen/margin_medium"
+    android:paddingRight="@dimen/margin_medium">
+
+    <TextView
+        android:id="@+id/titleText"
+        style="@style/TextAppearance.AppRatingDialog.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginBottom="@dimen/margin_tiny"
+        android:gravity="center_horizontal"
+        android:text="@string/how_was_your_experience_with_us" />
+
+    <TextView
+        android:id="@+id/descriptionText"
+        android:text="@string/play_store_invite_message"
+        style="@style/TextAppearance.AppRatingDialog.Description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_big"
+        android:textSize="12sp"
+        android:visibility="gone"
+        android:gravity="center_horizontal" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:numStars="5"/>
+
+    <TextView
+        android:id="@+id/noteDescriptionText"
+        style="@style/TextAppearance.AppRatingDialog.NoteLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_medium"
+        android:textColor="?attr/colorAccent"
+        tools:text="Very good" />
+
+    <EditText
+        android:id="@+id/commentEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textCursorDrawable="@null"
+        android:background="@drawable/edit_text_background"
+        android:hint="@string/rating_feedback_hint"
+        android:visibility="gone"
+        android:gravity="top"
+        android:inputType="text|textMultiLine"
+        android:lines="5"
+        android:padding="@dimen/margin_pre_medium"
+        android:layout_marginBottom="@dimen/margin_medium"
+        tools:ignore="LabelFor" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_marginBottom="@dimen/margin_medium">
+
+        <TextView
+            android:id="@+id/btn_dialog_neutral"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="@string/never"/>
+
+        <TextView
+            android:id="@+id/btn_dialog_positive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="@string/rate_now"/>
+
+        <TextView
+            android:id="@+id/btn_dialog_negative"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/btn_dialog_positive"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:text="@string/later"/>
+    </RelativeLayout>
+
+</LinearLayout>
