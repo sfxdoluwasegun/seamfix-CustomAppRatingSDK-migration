@@ -48,6 +48,31 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/apprating/src/main/java/com/seamfix/apprating/Builder.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/apprating/src/main/java/com/seamfix/apprating/CustomRatingBuilder.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/apprating/src/main/java/com/seamfix/apprating/FeedBackManager.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/apprating/src/main/java/com/seamfix/apprating/Feedback.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/apprating/src/main/java/com/seamfix/apprating/Util.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/apprating/src/main/res/drawable/edit_text_background.xml">
           <value>
             <set />
@@ -229,6 +254,11 @@
           </value>
         </entry>
         <entry key="/a.dummy">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="/fragment.java">
           <value>
             <set />
           </value>

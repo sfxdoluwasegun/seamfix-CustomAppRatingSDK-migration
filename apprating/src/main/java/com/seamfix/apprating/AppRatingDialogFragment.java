@@ -1,15 +1,13 @@
 package com.seamfix.apprating;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,37 +27,26 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 
 public class AppRatingDialogFragment extends DialogFragment implements RatingBar.OnRatingBarChangeListener, View.OnClickListener {
 
-    private static final String SESSION_COUNT = "session_count";
-    private static final String LAST_COUNT_TIME = "last_count_time";
-    private static final String SHOW_NEVER = "show_never";
-    private String myPrefs = "RatingDialog";
-    private SharedPreferences sharedpreferences;
-
     private Context context;
-    private Builder builder;
-    private TextView tvTitle, tvNegative, tvPositive, tvNeutral, tvDescription, tvNoteDescription;
+    private CustomRatingBuilder builder;
+    private TextView tvTitle, tvPositive, tvNeutral, tvDescription, tvNoteDescription;
     private RatingBar ratingBar;
     private EditText etFeedback;
     private LinearLayout linearLayout;
 
-    private float threshold;
-    private int session;
-    private boolean thresholdPassed = true;
-    private boolean ratingSet = false;
+    private int days;
+    private boolean changeToPlayStoreView = false;
     private boolean cancellable;
 
-    public AppRatingDialogFragment(Context context, Builder builder) {
+    public AppRatingDialogFragment(Context context, CustomRatingBuilder builder) {
         super();
         this.context = context;
         this.builder = builder;
 
-        this.session = builder.days;
-        this.threshold = builder.threshold;
+        this.days = builder.days;
         this.cancellable = builder.cancellable;
 
     }
@@ -74,10 +61,7 @@ public class AppRatingDialogFragment extends DialogFragment implements RatingBar
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        initializeSharedPreferences();
-
         tvTitle = view.findViewById(R.id.titleText);
-        tvNegative = view.findViewById(R.id.btn_dialog_negative);
         tvPositive = view.findViewById(R.id.btn_dialog_positive);
         tvNeutral = view.findViewById(R.id.btn_dialog_neutral);
         ratingBar = view.findViewById(R.id.ratingBar);
@@ -103,7 +87,6 @@ public class AppRatingDialogFragment extends DialogFragment implements RatingBar
 
         ratingBar.setOnRatingBarChangeListener(this);
         tvPositive.setOnClickListener(this);
-        tvNegative.setOnClickListener(this);
         tvNeutral.setOnClickListener(this);
         setCancelable(cancellable);
 
@@ -141,7 +124,6 @@ public class AppRatingDialogFragment extends DialogFragment implements RatingBar
         //Change the color of all buttons if the user set it
         if(builder.buttonColors != null){
             tvNeutral.setTextColor(getResources().getColor(builder.buttonColors));
-            tvNegative.setTextColor(getResources().getColor(builder.buttonColors));
             tvPositive.setTextColor(getResources().getColor(builder.buttonColors));
         }
 
@@ -155,67 +137,70 @@ public class AppRatingDialogFragment extends DialogFragment implements RatingBar
             DrawableCompat.setTint(DrawableCompat.wrap(layerDrawable.getDrawable(2)),
                     builder.ratingStarColor); // Full star color
         }
-
-
-        if (session == 1) {
-            tvNegative.setVisibility(View.GONE);
-        }
-    }
-
-    private void initializeSharedPreferences(){
-        if (sharedpreferences == null){
-            sharedpreferences = context.getSharedPreferences(myPrefs, Context.MODE_PRIVATE);
-        }
     }
 
     @Override
     public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+        //A callback each time the user changes the rating
         if (builder.ratingDialogListener != null){
-            builder.ratingDialogListener.onRatingSelected(rating, rating >= threshold);
-        } else {
-            if (rating > 0 && rating <= 5){
-                tvNoteDescription.setText(builder.noteDescriptions.get(Math.round(rating - 1)));
+            builder.ratingDialogListener.onRatingChanged(rating, rating >= builder.threshold);
+        }
+        if (rating > 0 && rating <= 5){
+            tvNoteDescription.setText(builder.noteDescriptions.get(Math.round(rating - 1)));
 
-                if (rating <= builder.threshold){
-                    etFeedback.setVisibility(View.VISIBLE);
-                } else {
-                    etFeedback.setVisibility(View.GONE);
-                }
+            if (rating < builder.threshold){
+                etFeedback.setVisibility(View.VISIBLE);
+            } else {
+                etFeedback.setVisibility(View.GONE);
             }
         }
-
-
-
     }
 
     @Override
     public void onClick(View view) {
 
         int id = view.getId();
-        if (id == R.id.btn_dialog_positive) {
+        if (id == R.id.btn_dialog_positive) {//user clicks RATE_NOW_BUTTON
             float rating = ratingBar.getRating();
 
             if (rating < 0.5) {
+                //the user did not set any rating star at all, so:
                 Animation shake = AnimationUtils.loadAnimation(context, R.anim.shake);
                 tvPositive.startAnimation(shake);
                 return;
             }
 
 
-            String feedback = etFeedback.getText().toString().trim();
-            if(builder.ratingSetListener != null){
-                builder.ratingSetListener.onRatingSet(
-                        this, ratingBar.getRating(), thresholdPassed, feedback);
+            if(rating < builder.threshold){
+                //the user set a low rating, a text view must have already appeared to collect the
+                //user's negative feedback.
+
+                //So now we get the negative feedback:
+                String feedback = getPoorFeedBack(etFeedback.getText().toString().trim());
+
+                //Sync the users feedback:
+                syncFeedback(rating, feedback);
+                dismiss();
+
+                new AlertDialog.Builder(requireContext()).setTitle("Feedback sent")
+                        .setMessage("Thanks for the feedback.").show();
             }
 
-            if (!ratingSet && ratingBar.getRating() >= threshold) {//the user is redirecting to playstore
+
+            if(rating >= builder.threshold && !changeToPlayStoreView){
+                //the user has just set a high rating, He should now be prompted to visit play store.
+
+                //But before that, lets get and sync the user's feedback:
+                String feedback = String.valueOf(rating) + " stars given!";
+
+                //Sync the users feedback:
+                syncFeedback(rating, feedback);
+
+                //Now prompt the user to visit play store and rate the app there:
                 tvDescription.setVisibility(View.VISIBLE);
-                tvNegative.setVisibility(View.VISIBLE);
                 etFeedback.setVisibility(View.GONE);
-                tvNeutral.setVisibility(View.GONE);
                 tvTitle.setText(R.string.rate_us_on_playstore);
                 tvPositive.setText(R.string.continue_text);
-                tvNegative.setText(R.string.skip);
                 ratingBar.setVisibility(View.GONE);
                 tvNoteDescription.setVisibility(View.GONE);
 
@@ -234,25 +219,39 @@ public class AppRatingDialogFragment extends DialogFragment implements RatingBar
                     tvDescription.setTextColor(getResources().getColor(builder.descriptionColor));
                 }
 
-                showNever();
-
-            } else if (ratingSet) {
-                dismiss();
-                openPlayStore();
-
-            } else {
-                dismiss();
+                changeToPlayStoreView = true;
             }
 
-            ratingSet = true;
-        } else if (id == R.id.btn_dialog_negative) {
-            initializeCount(false);
-            dismiss();
+            if (rating >= builder.threshold && changeToPlayStoreView){
+                //the user has agreed to rate the app on playstore:
+                openPlayStore();
+            }
+
         } else if (id == R.id.btn_dialog_neutral) {
-            showNever();
             dismiss();
         }
+    }
 
+
+    private String getPoorFeedBack(String feedback) {
+        if(feedback == null || feedback.isEmpty()){
+            return "No comment provided by user";
+        }else {
+            return feedback;
+        }
+    }
+
+
+    private void syncFeedback(float star, String comment) {
+        //emit the callback
+        if(builder.ratingSetListener != null){
+            builder.ratingSetListener.onRatingSet(
+                    this,
+                    ratingBar.getRating(),
+                    star >= builder.threshold,
+                    comment);
+        }
+        FeedBackManager.Companion.syncFeedback(builder,star, comment);
     }
 
     private void openPlayStore() {
@@ -267,190 +266,8 @@ public class AppRatingDialogFragment extends DialogFragment implements RatingBar
 
     @Override
     public void show(FragmentManager manager, String tag) {
-        if (shouldShowRatingDialog()){
+        if (true){
             super.show(manager, tag);
-        }
-
-    }
-
-    private boolean shouldShowRatingDialog() {
-
-        initializeSharedPreferences();
-
-        if (sharedpreferences.getBoolean(SHOW_NEVER, false)) {
-            return false;
-        }
-
-        if (session == 1) {
-            return true;
-        }
-
-        int count = sharedpreferences.getInt(SESSION_COUNT, 1);
-        long lastCountTime = sharedpreferences.getLong(LAST_COUNT_TIME, 0);
-
-        if (DateUtils.isToday(lastCountTime)){
-            return false;
-        } else if (DateUtils.isToday(lastCountTime + DateUtils.DAY_IN_MILLIS)){
-            return checkIfSessionMatchesCount(++count);
-
-        } else if (!builder.consecutive){
-            return checkIfSessionMatchesCount(++count);
-
-        } else {
-            initializeCount(true);
-            return false;
-
-        }
-
-
-    }
-
-    private void initializeCount(boolean includeSession) {
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putInt(SESSION_COUNT, includeSession ? 1 : 0);
-        editor.putLong(LAST_COUNT_TIME, Calendar.getInstance().getTimeInMillis());
-        editor.apply();
-    }
-
-    private boolean checkIfSessionMatchesCount(int count) {
-        if (session <= count) {
-            initializeCount(false);
-            return true;
-        } else {
-            SharedPreferences.Editor editor = sharedpreferences.edit();
-            editor.putInt(SESSION_COUNT, count);
-            editor.putLong(LAST_COUNT_TIME, Calendar.getInstance().getTimeInMillis());
-            editor.apply();
-            return false;
-        }
-    }
-
-    private void showNever() {
-        sharedpreferences = context.getSharedPreferences(myPrefs, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putBoolean(SHOW_NEVER, true);
-        editor.apply();
-    }
-
-    public static class Builder {
-
-        private final Context context;
-        private String playstoreUrl, playStoreTitle, playStoreMessage;
-        private String titleText;
-        private Integer backGroundColor, titleColor, ratingStarColor, descriptionColor, buttonColors;
-        private ArrayList<String> noteDescriptions;
-        private int days = 1;
-        private boolean consecutive;
-        private RatingSetListener ratingSetListener;
-        private RatingDialogListener ratingDialogListener;
-        private Drawable drawable;
-        private float threshold = 3;
-        private boolean cancellable = false;
-
-        public interface RatingThresholdClearedListener {
-            void onThresholdCleared(AppRatingDialogFragment ratingDialog, float rating, boolean thresholdCleared);
-        }
-
-        public interface RatingSetListener {
-            void onRatingSet(AppRatingDialogFragment ratingDialog, float rating, boolean thresholdCleared, String feedback);
-        }
-
-        public interface RatingDialogFormListener {
-            void onFormSubmitted(String feedback);
-        }
-
-        public interface RatingDialogListener {
-            void onRatingSelected(float rating, boolean thresholdCleared);
-        }
-
-        public Builder(Context context) {
-            this.context = context;
-            // Set default PlayStore URL
-            this.playstoreUrl = "market://details?id=" + context.getPackageName();
-
-        }
-
-        public Builder setThreshold(float threshold) {
-            this.threshold = threshold;
-            return this;
-        }
-
-        public Builder onRatingSet(RatingSetListener ratingSetListener) {
-            this.ratingSetListener = ratingSetListener;
-            return this;
-        }
-
-        public Builder onRatingChanged(RatingDialogListener ratingDialogListener) {
-            this.ratingDialogListener = ratingDialogListener;
-            return this;
-        }
-
-        public Builder setPlaystoreUrl(String playstoreUrl) {
-            this.playstoreUrl = "market://details?id=" + playstoreUrl;
-            return this;
-        }
-
-
-        public Builder setTitleText(String titleText) {
-            this.titleText = titleText;
-            return this;
-        }
-
-        public Builder setPlayStoreTitle(String title) {
-            this.playStoreTitle = title;
-            return this;
-        }
-
-        public Builder setPlayStoreMessage(String message) {
-            this.playStoreMessage = message;
-            return this;
-        }
-
-        public Builder setBackGroundColor(int color) {
-            this.backGroundColor = color;
-            return this;
-        }
-
-        public Builder setTitleColor(int color) {
-            this.titleColor = color;
-            return this;
-        }
-
-        public Builder setRatingStarColor(int color) {
-            this.ratingStarColor = color;
-            return this;
-        }
-
-
-        public Builder setDescriptionColor(int color) {
-            this.descriptionColor = color;
-            return this;
-        }
-
-
-        public Builder setButtonColor(int color) {
-            this.buttonColors = color;
-            return this;
-        }
-
-        public Builder setCancellable(boolean cancellable){
-            this.cancellable = cancellable;
-            return this;
-        }
-
-        public Builder setNoteDescriptionText(List<String> noteDescriptions){
-            this.noteDescriptions = new ArrayList<>(noteDescriptions);
-            return this;
-        }
-
-        public Builder setSessionCount(int days, boolean consecutive){
-            this.days = days;
-            this.consecutive = consecutive;
-            return this;
-        }
-
-        public AppRatingDialogFragment build() {
-            return new AppRatingDialogFragment(context, this);
         }
     }
 }

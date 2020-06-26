@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.seamfix.apprating.AppRatingDialogFragment
+import com.seamfix.apprating.CustomRatingBuilder
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,7 +18,7 @@ class MainActivity : AppCompatActivity() {
             packageId = packageId.replace(".debug", "")
         }
 
-        var ratingDialogFragment = AppRatingDialogFragment.Builder(this)
+        var ratingDialogFragment = CustomRatingBuilder(this)
             .setTitleText("up")
             .setNoteDescriptionText(listOf("Not Good", "Not Good", "Quite Okay", "Great Stuff!", "Excellent!"))
             .onRatingSet(this::onRatingSet)
