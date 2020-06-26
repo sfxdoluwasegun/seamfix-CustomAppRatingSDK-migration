@@ -3,7 +3,17 @@
   <component name="issues">
     <option name="index">
       <map>
+        <entry key="/Dummy.txt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6040e80daf2025acf836d22774f97e07/app-rating-2.3.1/res/values/values.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../Lumiatek/app/src/main/java/com/lumiatek/lumiatek/MainActivity.kt">
           <value>
             <set />
           </value>
@@ -13,7 +23,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/apprating/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/apprating/src/main/AndroidManifest.xml">
           <value>
             <set />
           </value>
@@ -33,6 +53,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/apprating/src/main/res/layout/dialog_fragment_app_rating.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/apprating/src/main/res/values/colors.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/apprating/src/main/res/values/dimens.xml">
           <value>
             <set />
@@ -48,7 +78,122 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/apprating/src/main/res/values/styles.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/apprating/src/main/res/values/themes.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../Safe/app/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../Safe/app/src/main/java/com/seamfix/bioregistra/activity/MainApplicationActivity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../Safe/app/src/main/java/com/seamfix/bioregistra/dialogfragment/AppRatingDialogFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../Safe/app/src/main/java/com/seamfix/bioregistra/fragment/MainProjectFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../Safe/app/src/main/java/com/seamfix/bioregistra/services/BioregistraSyncService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../Safe/app/src/main/java/com/seamfix/bioregistra/utility/ClockTimerUtil.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../Safe/app/src/main/java/com/seamfix/bioregistra/utility/RealmSession.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../Safe/app/src/main/res/layout/dialog_fragment_about.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../Safe/app/src/main/res/values/strings.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../Safe/app/src/uba/res/layout/fragment_app_login.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../VoiceofFreedom/app/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../VoiceofFreedom/app/src/main/java/com/bellogate/voiceoffreedom/data/datasource/network/NetworkHelper.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../VoiceofFreedom/app/src/main/java/com/bellogate/voiceoffreedom/ui/media/video/VideoFragment.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../VoiceofFreedom/app/src/main/java/com/bellogate/voiceoffreedom/ui/media/video/VideoItem.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../VoiceofFreedom/app/src/main/java/com/bellogate/voiceoffreedom/ui/media/video/VideoListAdapter.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../VoiceofFreedom/app/src/main/res/layout/video_view_item.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../android-material-app-rating/app-rating/src/main/java/com/stepstone/apprating/AppRatingDialog.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../android-material-app-rating/app-rating/src/main/java/com/stepstone/apprating/AppRatingDialogFragment.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../br-android-client/app/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../br-android-client/app/src/main/java/com/seamfix/bioregistra/activity/MainApplicationActivity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../br-android-client/app/src/main/java/com/seamfix/bioregistra/dialogfragment/AppRatingDialogFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../br-android-client/app/src/main/java/com/seamfix/bioregistra/dialogfragment/Rating.java">
           <value>
             <set />
           </value>
@@ -58,7 +203,32 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../br-android-client/app/src/main/java/com/seamfix/bioregistra/services/BioregistraSyncService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../br-android-client/app/src/main/java/com/seamfix/bioregistra/utility/RealmSession.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../br-android-client/app/src/main/res/layout/dialog_fragment_app_rating.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../br-android-client/apprating-debug/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../br-android-client/apprating/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="/a.dummy">
           <value>
             <set />
           </value>

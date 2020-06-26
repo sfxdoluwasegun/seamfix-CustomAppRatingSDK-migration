@@ -4,7 +4,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.format.DateUtils;
@@ -15,12 +17,14 @@ import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -41,6 +45,7 @@ public class AppRatingDialogFragment extends DialogFragment implements RatingBar
     private TextView tvTitle, tvNegative, tvPositive, tvNeutral, tvDescription, tvNoteDescription;
     private RatingBar ratingBar;
     private EditText etFeedback;
+    private LinearLayout linearLayout;
 
     private float threshold;
     private int session;
@@ -76,6 +81,7 @@ public class AppRatingDialogFragment extends DialogFragment implements RatingBar
         tvPositive = view.findViewById(R.id.btn_dialog_positive);
         tvNeutral = view.findViewById(R.id.btn_dialog_neutral);
         ratingBar = view.findViewById(R.id.ratingBar);
+        linearLayout = view.findViewById(R.id.layout);
         tvDescription = view.findViewById(R.id.descriptionText);
         tvNoteDescription = view.findViewById(R.id.noteDescriptionText);
         etFeedback = view.findViewById(R.id.commentEditText);
@@ -100,6 +106,56 @@ public class AppRatingDialogFragment extends DialogFragment implements RatingBar
         tvNegative.setOnClickListener(this);
         tvNeutral.setOnClickListener(this);
         setCancelable(cancellable);
+
+        //Change the title text from the default if the user set it:
+        if(builder.titleText != null && !(builder.titleText.isEmpty())){
+            tvTitle.setText(builder.titleText);
+        }
+
+        //Change the description to a default if the user did not set it:
+        if(builder.noteDescriptions == null || builder.noteDescriptions.size() < 5){
+            ArrayList<String> list = new ArrayList<>();
+            list.add("Not Good");
+            list.add("Not Good");
+            list.add("Quite Okay");
+            list.add("Great Stuff!");
+            list.add("Excellent!");
+            builder.noteDescriptions = list;
+        }
+
+        //Change the background color if the user set it
+        if(builder.backGroundColor != null){
+            linearLayout.setBackgroundColor(getResources().getColor(builder.backGroundColor));
+        }
+
+        //Change the title color if the user set it
+        if(builder.titleColor != null){
+            tvTitle.setTextColor(getResources().getColor(builder.titleColor));
+        }
+
+        //Change the description color if the user set it
+        if(builder.descriptionColor != null){
+            tvNoteDescription.setTextColor(getResources().getColor(builder.descriptionColor));
+        }
+
+        //Change the color of all buttons if the user set it
+        if(builder.buttonColors != null){
+            tvNeutral.setTextColor(getResources().getColor(builder.buttonColors));
+            tvNegative.setTextColor(getResources().getColor(builder.buttonColors));
+            tvPositive.setTextColor(getResources().getColor(builder.buttonColors));
+        }
+
+        //Change the rating start color if the user set it
+        if(builder.ratingStarColor != null){
+            LayerDrawable layerDrawable = (LayerDrawable) ratingBar.getProgressDrawable();
+            DrawableCompat.setTint(DrawableCompat.wrap(layerDrawable.getDrawable(0)),
+                    Color.LTGRAY);  // Empty star color (the initial state)
+            DrawableCompat.setTint(DrawableCompat.wrap(layerDrawable.getDrawable(1)),
+                    builder.ratingStarColor); // Partial star color
+            DrawableCompat.setTint(DrawableCompat.wrap(layerDrawable.getDrawable(2)),
+                    builder.ratingStarColor); // Full star color
+        }
+
 
         if (session == 1) {
             tvNegative.setVisibility(View.GONE);
@@ -147,10 +203,12 @@ public class AppRatingDialogFragment extends DialogFragment implements RatingBar
 
 
             String feedback = etFeedback.getText().toString().trim();
-            builder.ratingSetListener.onRatingSet(
-                    this, ratingBar.getRating(), thresholdPassed, feedback);
+            if(builder.ratingSetListener != null){
+                builder.ratingSetListener.onRatingSet(
+                        this, ratingBar.getRating(), thresholdPassed, feedback);
+            }
 
-            if (!ratingSet && ratingBar.getRating() >= threshold) {
+            if (!ratingSet && ratingBar.getRating() >= threshold) {//the user is redirecting to playstore
                 tvDescription.setVisibility(View.VISIBLE);
                 tvNegative.setVisibility(View.VISIBLE);
                 etFeedback.setVisibility(View.GONE);
@@ -160,6 +218,22 @@ public class AppRatingDialogFragment extends DialogFragment implements RatingBar
                 tvNegative.setText(R.string.skip);
                 ratingBar.setVisibility(View.GONE);
                 tvNoteDescription.setVisibility(View.GONE);
+
+                //Change the title text to what was set by user as playstore title:
+                if(builder.playStoreTitle != null && !(builder.playStoreTitle.isEmpty())){
+                    tvTitle.setText(builder.playStoreTitle);
+                }
+
+                //Change the title text to what was set by user as playstore title:
+                if(builder.playStoreMessage != null && !(builder.playStoreMessage.isEmpty())){
+                    tvDescription.setText(builder.playStoreMessage);
+                }
+
+                //Change the description color if the user set it
+                if(builder.descriptionColor != null){
+                    tvDescription.setTextColor(getResources().getColor(builder.descriptionColor));
+                }
+
                 showNever();
 
             } else if (ratingSet) {
@@ -176,6 +250,7 @@ public class AppRatingDialogFragment extends DialogFragment implements RatingBar
             dismiss();
         } else if (id == R.id.btn_dialog_neutral) {
             showNever();
+            dismiss();
         }
 
     }
@@ -260,7 +335,9 @@ public class AppRatingDialogFragment extends DialogFragment implements RatingBar
     public static class Builder {
 
         private final Context context;
-        private String playstoreUrl;
+        private String playstoreUrl, playStoreTitle, playStoreMessage;
+        private String titleText;
+        private Integer backGroundColor, titleColor, ratingStarColor, descriptionColor, buttonColors;
         private ArrayList<String> noteDescriptions;
         private int days = 1;
         private boolean consecutive;
@@ -310,6 +387,49 @@ public class AppRatingDialogFragment extends DialogFragment implements RatingBar
 
         public Builder setPlaystoreUrl(String playstoreUrl) {
             this.playstoreUrl = "market://details?id=" + playstoreUrl;
+            return this;
+        }
+
+
+        public Builder setTitleText(String titleText) {
+            this.titleText = titleText;
+            return this;
+        }
+
+        public Builder setPlayStoreTitle(String title) {
+            this.playStoreTitle = title;
+            return this;
+        }
+
+        public Builder setPlayStoreMessage(String message) {
+            this.playStoreMessage = message;
+            return this;
+        }
+
+        public Builder setBackGroundColor(int color) {
+            this.backGroundColor = color;
+            return this;
+        }
+
+        public Builder setTitleColor(int color) {
+            this.titleColor = color;
+            return this;
+        }
+
+        public Builder setRatingStarColor(int color) {
+            this.ratingStarColor = color;
+            return this;
+        }
+
+
+        public Builder setDescriptionColor(int color) {
+            this.descriptionColor = color;
+            return this;
+        }
+
+
+        public Builder setButtonColor(int color) {
+            this.buttonColors = color;
             return this;
         }
 
