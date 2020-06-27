@@ -11,6 +11,8 @@ import java.util.List;
 @Keep
 public class CustomRatingBuilder {
 
+    final String NO_VALUE_PROVIDED = "NO_VALUE_PROVIDED";
+
     private final Context context;
     String playstoreUrl, playStoreTitle, playStoreMessage;
     String titleText;
@@ -22,14 +24,14 @@ public class CustomRatingBuilder {
     RatingDialogListener ratingDialogListener;
     float threshold = 3;// 3 stars is the default threshold
     boolean cancellable = false;
-    String appName = "NO_VALUE_PROVIDED";
-    String userName = "NO_VALUE_PROVIDED";
-    String userPhoneNumber = "NO_VALUE_PROVIDED";
-    String userEmail = "NO_VALUE_PROVIDED";
-    String userAddress = "NO_VALUE_PROVIDED";
-    String timestamp = "NO_VALUE_PROVIDED";
-    String userDeviceName = "NO_VALUE_PROVIDED";
-    String location = "NO_VALUE_PROVIDED";
+    String appName = NO_VALUE_PROVIDED;
+    String userName = NO_VALUE_PROVIDED;
+    String userPhoneNumber = NO_VALUE_PROVIDED;
+    String userEmail = NO_VALUE_PROVIDED;
+    String userAddress = NO_VALUE_PROVIDED;
+    String timestamp = NO_VALUE_PROVIDED;
+    String userDeviceName = NO_VALUE_PROVIDED;
+    String location = NO_VALUE_PROVIDED;
 
 
     public interface RatingSetListener {
