@@ -164,7 +164,8 @@ public class CustomRatingBuilder {
         return this;
     }
 
-    public void setFrequency(int frequency) {
+    public CustomRatingBuilder setFrequency(int frequency) {
         this.frequency = frequency;
+        return this;
     }
 }

@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
             .setButtonColor(R.color.red)
             .setCancellable(true)
             .setThreshold(3f)
+            .setFrequency(10)
             .build()
 
         ratingDialogFragment.show(supportFragmentManager, "")
