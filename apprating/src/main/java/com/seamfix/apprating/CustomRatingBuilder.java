@@ -11,7 +11,7 @@ import java.util.List;
 @Keep
 public class CustomRatingBuilder {
 
-    final String NO_VALUE_PROVIDED = "NO_VALUE_PROVIDED";
+    private static final String NO_VALUE_PROVIDED = "NO_VALUE_PROVIDED";
 
     private final Context context;
     String playstoreUrl, playStoreTitle, playStoreMessage;
