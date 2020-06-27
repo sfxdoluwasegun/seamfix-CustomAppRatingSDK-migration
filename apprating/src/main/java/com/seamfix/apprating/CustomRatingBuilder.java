@@ -11,7 +11,7 @@ import java.util.List;
 @Keep
 public class CustomRatingBuilder {
 
-    final Context context;
+    private final Context context;
     String playstoreUrl, playStoreTitle, playStoreMessage;
     String titleText;
     Integer backGroundColor, titleColor, ratingStarColor, descriptionColor, buttonColors;
@@ -22,6 +22,14 @@ public class CustomRatingBuilder {
     RatingDialogListener ratingDialogListener;
     float threshold = 3;// 3 stars is the default threshold
     boolean cancellable = false;
+    String appName = "NO_VALUE_PROVIDED";
+    String userName = "NO_VALUE_PROVIDED";
+    String userPhoneNumber = "NO_VALUE_PROVIDED";
+    String userEmail = "NO_VALUE_PROVIDED";
+    String userAddress = "NO_VALUE_PROVIDED";
+    String timestamp = "NO_VALUE_PROVIDED";
+    String userDeviceName = "NO_VALUE_PROVIDED";
+    String location = "NO_VALUE_PROVIDED";
 
 
     public interface RatingSetListener {
@@ -115,5 +123,46 @@ public class CustomRatingBuilder {
 
     public AppRatingDialogFragment build() {
         return new AppRatingDialogFragment(context, this);
+    }
+
+
+    public CustomRatingBuilder setAppName(String appName) {
+        this.appName = appName;
+        return this;
+    }
+
+    public CustomRatingBuilder setUserName(String userName) {
+        this.userName = userName;
+        return this;
+    }
+
+    public CustomRatingBuilder setUserPhoneNumber(String userPhoneNumber) {
+        this.userPhoneNumber = userPhoneNumber;
+        return this;
+    }
+
+    public CustomRatingBuilder setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+        return this;
+    }
+
+    public CustomRatingBuilder setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
+        return this;
+    }
+
+    public CustomRatingBuilder setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+        return this;
+    }
+
+    public CustomRatingBuilder setUserDeviceName(String userDeviceName) {
+        this.userDeviceName = userDeviceName;
+        return this;
+    }
+
+    public CustomRatingBuilder setLocation(String location) {
+        this.location = location;
+        return this;
     }
 }
