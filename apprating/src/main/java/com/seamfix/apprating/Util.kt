@@ -69,6 +69,7 @@ fun shouldShowDialog(context: Context, frequency: Int): Boolean {
         val currentTime = System.currentTimeMillis()
         return if (currentTime >= nextPopupTime) { //Launch SDK
             //But first, use our currentTime to calculate the next 'nextPopupTime' then save it:
+            Log.e("SDK", "SDK interval launch!")
             getAndSaveNextPopupTime(sharedPref, currentTime, frequency)
             true
         }else {
