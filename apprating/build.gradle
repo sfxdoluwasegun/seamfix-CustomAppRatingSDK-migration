@@ -16,9 +16,32 @@ android {
         consumerProguardFiles 'consumer-rules.pro'
     }
 
+    signingConfigs {
+        release {
+            keyAlias 'bioregistra'
+            keyPassword 'b10registra3142'
+            storeFile file('../BioregistraKey.jks')
+            storePassword 'b10registra3142'
+        }
+
+        debug {
+            keyAlias 'bioregistra'
+            keyPassword 'b10registra3142'
+            storeFile file('../BioregistraKey.jks')
+            storePassword 'b10registra3142'
+        }
+    }
+
+
     buildTypes {
         release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
             minifyEnabled false
+            debuggable true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
