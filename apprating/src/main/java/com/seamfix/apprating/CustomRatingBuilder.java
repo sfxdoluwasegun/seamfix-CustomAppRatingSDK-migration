@@ -29,7 +29,7 @@ public class CustomRatingBuilder {
     String userPhoneNumber = NO_VALUE_PROVIDED;
     String userEmail = NO_VALUE_PROVIDED;
     String userAddress = NO_VALUE_PROVIDED;
-    String timestamp = NO_VALUE_PROVIDED;
+    Long timestamp = System.currentTimeMillis();
     String userDeviceName = NO_VALUE_PROVIDED;
     String location = NO_VALUE_PROVIDED;
 
@@ -149,7 +149,7 @@ public class CustomRatingBuilder {
         return this;
     }
 
-    public CustomRatingBuilder setTimestamp(String timestamp) {
+    public CustomRatingBuilder setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
         return this;
     }

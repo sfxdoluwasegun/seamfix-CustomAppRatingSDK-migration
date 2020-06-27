@@ -4,7 +4,7 @@ import androidx.annotation.Keep
 
 @Keep
 //App Name|Name|Email Address|Rating |Comment|Timestamp|Device|location
-class Feedback(val appName: String,
+data class Feedback(val appName: String,
                val userName: String,
                val emailAddress: String,
                val rating: Float,
