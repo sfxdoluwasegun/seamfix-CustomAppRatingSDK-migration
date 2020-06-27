@@ -220,11 +220,15 @@ public class AppRatingDialogFragment extends DialogFragment implements RatingBar
                 }
 
                 changeToPlayStoreView = true;
+                return;
             }
 
             if (rating >= builder.threshold && changeToPlayStoreView){
                 //the user has agreed to rate the app on playstore:
                 openPlayStore();
+
+                //after you have opened playstore, you should reset this value:
+                changeToPlayStoreView = false;
             }
 
         } else if (id == R.id.btn_dialog_neutral) {
