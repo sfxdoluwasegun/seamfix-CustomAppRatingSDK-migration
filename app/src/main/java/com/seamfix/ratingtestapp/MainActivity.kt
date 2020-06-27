@@ -29,8 +29,10 @@ class MainActivity : AppCompatActivity() {
             .setTitleColor(R.color.colorPrimaryDark)
             .setRatingStarColor(Color.MAGENTA)//Must use Color constants
             .setDescriptionColor(R.color.red)
+            .setAppName("SAMSUNG 3030")
+            .setUserEmail("jeffemuveyan@gmail.com")
             .setButtonColor(R.color.red)
-
+            .setCancellable(true)
             .setThreshold(3f)
             .build()
 

@@ -18,12 +18,12 @@ public class CustomRatingBuilder {
     String titleText;
     Integer backGroundColor, titleColor, ratingStarColor, descriptionColor, buttonColors;
     ArrayList<String> noteDescriptions;
-    int days = 1;
-    boolean consecutive;
+
     RatingSetListener ratingSetListener;
     RatingDialogListener ratingDialogListener;
     float threshold = 3;// 3 stars is the default threshold
     boolean cancellable = false;
+    int frequency = 3; //3 days is the default frequency interval for every popup.
     String appName = NO_VALUE_PROVIDED;
     String userName = NO_VALUE_PROVIDED;
     String userPhoneNumber = NO_VALUE_PROVIDED;
@@ -117,11 +117,7 @@ public class CustomRatingBuilder {
         return this;
     }
 
-    public CustomRatingBuilder setSessionCount(int days, boolean consecutive){
-        this.days = days;
-        this.consecutive = consecutive;
-        return this;
-    }
+
 
     public AppRatingDialogFragment build() {
         return new AppRatingDialogFragment(context, this);
@@ -166,5 +162,9 @@ public class CustomRatingBuilder {
     public CustomRatingBuilder setLocation(String location) {
         this.location = location;
         return this;
+    }
+
+    public void setFrequency(int frequency) {
+        this.frequency = frequency;
     }
 }

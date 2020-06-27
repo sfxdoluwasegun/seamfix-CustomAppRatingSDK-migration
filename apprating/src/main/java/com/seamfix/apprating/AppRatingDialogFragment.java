@@ -4,10 +4,12 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +29,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
+import static com.seamfix.apprating.UtilKt.shouldShowDialog;
 
 public class AppRatingDialogFragment extends DialogFragment implements RatingBar.OnRatingBarChangeListener, View.OnClickListener {
 
@@ -37,7 +40,6 @@ public class AppRatingDialogFragment extends DialogFragment implements RatingBar
     private EditText etFeedback;
     private LinearLayout linearLayout;
 
-    private int days;
     private boolean changeToPlayStoreView = false;
     private boolean cancellable;
 
@@ -45,10 +47,7 @@ public class AppRatingDialogFragment extends DialogFragment implements RatingBar
         super();
         this.context = context;
         this.builder = builder;
-
-        this.days = builder.days;
         this.cancellable = builder.cancellable;
-
     }
 
     @Nullable
@@ -270,7 +269,7 @@ public class AppRatingDialogFragment extends DialogFragment implements RatingBar
 
     @Override
     public void show(FragmentManager manager, String tag) {
-        if (true){
+        if (context != null && shouldShowDialog(context, builder.frequency)) {
             super.show(manager, tag);
         }
     }
