@@ -40,12 +40,11 @@
         android:numStars="5"/>
 
     <TextView
+        android:fontFamily="@font/lato_bold"
         android:id="@+id/noteDescriptionText"
-        style="@style/TextAppearance.AppRatingDialog.NoteLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_medium"
-        android:textColor="?attr/colorAccent"
         tools:text="Very good" />
 
     <EditText

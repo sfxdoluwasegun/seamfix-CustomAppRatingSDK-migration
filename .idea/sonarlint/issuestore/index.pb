@@ -82,7 +82,5 @@ i
 9apprating/src/main/java/com/seamfix/apprating/Feedback.kt,a/3/a3dd49195d8926b4434450671490726d81e7e39c
 p
 @apprating/src/main/java/com/seamfix/apprating/FeedBackManager.kt,8/7/879d0495dbf453d10d4125cdc3d3b45b28194bc2
-l
-<apprating/src/main/res/layout/dialog_fragment_app_rating.xml,8/e/8e184bea9729de14c38890b205aa2071fbd90ba7
 v
 Fapprating/src/main/java/com/seamfix/apprating/CustomRatingBuilder.java,4/3/43fd4b90953ba941acc0ef91850ca7fe6eae4c9a
