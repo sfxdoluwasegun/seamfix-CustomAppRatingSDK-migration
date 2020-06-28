@@ -28,6 +28,8 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.androidnetworking.AndroidNetworking;
+
 import java.util.ArrayList;
 import static com.seamfix.apprating.UtilKt.shouldShowDialog;
 
@@ -48,6 +50,9 @@ public class AppRatingDialogFragment extends DialogFragment implements RatingBar
         this.context = context;
         this.builder = builder;
         this.cancellable = builder.cancellable;
+
+        //init Android Networking:
+        AndroidNetworking.initialize(context);
     }
 
     @Nullable
@@ -254,7 +259,7 @@ public class AppRatingDialogFragment extends DialogFragment implements RatingBar
                     star >= builder.threshold,
                     comment);
         }
-        FeedBackManager.Companion.syncFeedback(builder,star, comment);
+        FeedBackManager.Companion.syncFeedback(context, builder,star, comment);
     }
 
     private void openPlayStore() {

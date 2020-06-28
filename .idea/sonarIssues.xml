@@ -28,12 +28,32 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../MyApplication/app/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MyApplication/app/src/main/java/com/example/myapplication/MainActivity.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MyApplication/app/src/main/res/layout/activity_main.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/.gitignore">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
           <value>
             <set />
           </value>
@@ -88,7 +108,37 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/apprating/src/main/java/com/seamfix/apprating/FeedbackWorker.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/apprating/src/main/java/com/seamfix/apprating/FeedbackWorker.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/apprating/src/main/java/com/seamfix/apprating/MyWorker.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/apprating/src/main/java/com/seamfix/apprating/Util.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/apprating/src/main/java/com/seamfix/apprating/Util.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/apprating/src/main/java/com/seamfix/apprating/Worker.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/apprating/src/main/java/entities/Feedback.kt">
           <value>
             <set />
           </value>
@@ -193,6 +243,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../VoiceofFreedom/app/src/main/java/com/bellogate/voiceoffreedom/data/video/SyncVideoManager.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../VoiceofFreedom/app/src/main/java/com/bellogate/voiceoffreedom/ui/media/video/VideoFragment.kt">
           <value>
             <set />
@@ -279,6 +334,11 @@
           </value>
         </entry>
         <entry key="$USER_HOME$/Documents/in_app_update/app/src/main/java/com/voiceoffreedom/jeffemuveyan/voiceoffreedom/MainActivity.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/Documents/in_app_update/settings.gradle">
           <value>
             <set />
           </value>

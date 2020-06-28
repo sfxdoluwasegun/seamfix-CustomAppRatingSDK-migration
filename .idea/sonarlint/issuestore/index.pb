@@ -84,3 +84,7 @@ p
 @apprating/src/main/java/com/seamfix/apprating/FeedBackManager.kt,8/7/879d0495dbf453d10d4125cdc3d3b45b28194bc2
 v
 Fapprating/src/main/java/com/seamfix/apprating/CustomRatingBuilder.java,4/3/43fd4b90953ba941acc0ef91850ca7fe6eae4c9a
+e
+5apprating/src/main/java/com/seamfix/apprating/Util.kt,b/e/beb62db9278eff100ce7f9df9f5cb7acf7169396
+o
+?apprating/src/main/java/com/seamfix/apprating/FeedbackWorker.kt,a/5/a59a1e816dfae9f02d710d17e7f012f60dd859c6

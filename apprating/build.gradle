@@ -16,6 +16,14 @@ android {
         consumerProguardFiles 'consumer-rules.pro'
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
     signingConfigs {
         release {
             keyAlias 'bioregistra'
@@ -59,4 +67,11 @@ dependencies {
 
     //Dependency for the Android Material Rating Dialog
     implementation 'com.stepstone.apprating:app-rating:2.3.1'
+
+    //Workmanager
+    implementation "androidx.work:work-runtime-ktx:2.3.4"
+
+    //Android Networking
+    implementation 'com.amitshekhar.android:android-networking:1.0.2'
+
 }
