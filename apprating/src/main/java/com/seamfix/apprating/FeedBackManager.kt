@@ -9,7 +9,8 @@ class FeedBackManager {
     companion object{
 
         fun syncFeedback(context: Context, builder: CustomRatingBuilder, star: Float, comment: String) {
-            val feedback = Feedback(
+            val feedback = Feedback(System.currentTimeMillis(),
+                builder.getPackageName(),
                 builder.appName,
                 builder.userName,
                 builder.userEmail,
