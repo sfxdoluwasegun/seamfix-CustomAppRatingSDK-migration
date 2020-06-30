@@ -14,7 +14,7 @@ public class CustomRatingBuilder {
     private static final String NO_VALUE_PROVIDED = "NO_VALUE_PROVIDED";
 
     private final Context context;
-    String playstoreUrl, playStoreTitle, playStoreMessage;
+    String packageName, playstoreUrl, playStoreTitle, playStoreMessage;
     String titleText;
     Integer backGroundColor, titleColor, ratingStarColor, descriptionColor, buttonColors;
     ArrayList<String> noteDescriptions;
@@ -46,7 +46,12 @@ public class CustomRatingBuilder {
         this.context = context;
         // Set default PlayStore URL
         this.playstoreUrl = "market://details?id=" + context.getPackageName();
+        this.packageName = context.getPackageName();
 
+    }
+
+    public String getPackageName() {
+        return packageName;
     }
 
     public CustomRatingBuilder setThreshold(float threshold) {
