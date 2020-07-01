@@ -108,6 +108,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/apprating/src/main/java/com/seamfix/apprating/FeedbackResponse.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/apprating/src/main/java/com/seamfix/apprating/FeedbackWorker.java">
           <value>
             <set />
